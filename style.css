@@ -1,0 +1,16 @@
+.firstrow {
+display: flex;
+}
+
+.secondrow {
+    display: flex;
+}
+
+.thirdrow {
+    display: flex;
+}
+
+.spectrograms {
+flex: 75%;
+}
+
