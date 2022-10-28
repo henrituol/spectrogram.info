@@ -24,3 +24,5 @@ Idea of the game:
 - Show next set of images and audio by clicking "next".
 
 All the sound files and images are fetched from https://xeno-canto.org/ 
+
+You can try out the quiz here: [(http://spectrogram.info/)](http://spectrogram.info/)
