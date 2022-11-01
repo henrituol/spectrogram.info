@@ -1,16 +1,41 @@
-.firstrow {
-display: flex;
+.firstrow  {
+    display: flex;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #070c01;
+    margin: 10px;
+    background-color: aliceblue;
 }
 
 .secondrow {
     display: flex;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #070c01;
+    margin: 10px;
+    background-color: aliceblue;
 }
 
 .thirdrow {
     display: flex;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #070c01;
+    margin: 10px;
+    background-color: aliceblue;
 }
 
 .spectrograms {
-flex: 75%;
+    flex: 75%;
 }
 
+.container {
+    max-width: fit-content;
+    border-radius: 15px;
+    border: 1px solid #070c01;
+    background-color: rgb(248, 247, 247);
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+}
