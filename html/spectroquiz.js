@@ -221,25 +221,22 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
     displaySpectrogram(image1, 1); // Display spectrogram specified when function is called on the row #1.
     displaySpectrogram(image2, 2);
     displaySpectrogram(image3, 3);
-    document.getElementById("result").innerHTML= "Select a checkbox."
+    document.getElementById("result").innerHTML= "Press a spectrogram."
 
     // Create checkbox listeners 
     document.getElementById("A").addEventListener(
         "change", () => { 
             putDefaultColor (),
-            uncheckPreviousAnswer("B", "C"),
             selectionResult("A", whichOneIsRight) 
     });
     document.getElementById("B").addEventListener(
         "change", () => { 
             putDefaultColor (),
-            uncheckPreviousAnswer("A", "C"),
             selectionResult("B", whichOneIsRight) 
     });
     document.getElementById("C").addEventListener(
         "change", () => { 
             putDefaultColor (),
-            uncheckPreviousAnswer("A", "B"),
             selectionResult("C", whichOneIsRight) 
         });
 
@@ -252,7 +249,6 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
         document.querySelector(".secondrow").style.background = defaultColor;
         document.querySelector(".thirdrow").style.background = defaultColor;
     }
-
 
     // Check whether the checkbox that changed is the correct selection or not.
     // Also, let the user know!
@@ -287,23 +283,9 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
         }
     }
 
-    // Check, if there is already a selection symbol in another checkbox.
-    // If there is, clear that box. Otherwise, it will look like you could have multiple choices, which isn't true.
-    function uncheckPreviousAnswer(anotherCheckbox, yetAnotherCheckbox) {
-        if (document.getElementById(anotherCheckbox).checked == true) {
-            document.getElementById(anotherCheckbox).checked = false;
-
-        } 
-        if (document.getElementById(yetAnotherCheckbox).checked == true) {
-            document.getElementById(yetAnotherCheckbox).checked = false;
-        }
-    }
-
     // Ready the next quiz view.
     utilizeFetchedData(dataFromXenocanto);
 }
-
-
 
 
 // ============================ HELPER FUNCTIONS ========================================= // 
