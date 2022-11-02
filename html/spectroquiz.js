@@ -12,6 +12,14 @@ let xenocantoFalseX;
 let xenocantoFalseY;
 let dataFromXenocanto;
 
+// For debugging
+/*
+let debuggerUFD = 0;    // UFD for utilizeFetchedData
+let debuggerRS = 0;     // RS for randomizeSpectrograms
+let debuggerCQP = 0;    // CQP for createQuizPage
+let clickCounter = 0;
+*/
+
 // https://xeno-canto.org/ offers a handy query for JSON
 // The scope of recordings is confined to A quality recordings.
 fetch("https://xeno-canto.org/api/2/recordings?query=q:A") // xeno-canto query into a promise
@@ -22,9 +30,17 @@ fetch("https://xeno-canto.org/api/2/recordings?query=q:A") // xeno-canto query i
 function saveData(data) {
     dataFromXenocanto = data; // Save data into the global variable for later use.
     utilizeFetchedData(dataFromXenocanto); // This is also called later, hence, this different function; no need to save data again.
+    //console.log("Data saved.")
 }
 
 function utilizeFetchedData(data) {
+
+    // For debugging
+    /*
+    console.log(xenocantoCorrectSpectrogram);
+    debuggerUFD = debuggerUFD + 1;
+    console.log("We came to utilizeFetchedData for " + debuggerUFD + ". time.")
+    */
     
     // There are 500 recordings in the first page of data, therefore, let's pick one randomly between 1-500.
     let randomNumber = Math.floor(Math.random() * 501);
@@ -60,16 +76,16 @@ function utilizeFetchedData(data) {
 
     // To indicate the user that the app is ready to be used, change the text inside the button.
     document.getElementById("next").innerHTML = "Quiz me!"
-    document.getElementById("next").addEventListener(
-        "click", () => { randomizeSpectrograms(); }
-    );
+    document.getElementById("next").addEventListener("click", randomizeSpectrograms);
 }
 
 
-// ============================ MAIN FUNCTIONS ========================================= // 
-
 //  Before we create a new quiz view, let's randomize order of the images.
 function randomizeSpectrograms () {
+
+    // For debugging
+    //debuggerRS = debuggerRS + 1;
+    //console.log("We came to createQuizPage for " + debuggerRS + ". time.")
 
     // Variables into array and shuffle.
 
@@ -79,7 +95,7 @@ function randomizeSpectrograms () {
     // Then again, in this context, it is sufficient.
     function shuffle(array) {
         array.sort(() => Math.random() - 0.5);
-      }
+    }
       
     let arrayOfSpectrograms = [xenocantoFalseY, xenocantoFalseX, xenocantoCorrectSpectrogram];
     shuffle(arrayOfSpectrograms);
@@ -109,13 +125,14 @@ function randomizeSpectrograms () {
 // Main function that connects various parts to create a quiz page.
 function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
 
+    // For debugging
+    //debuggerCQP = debuggerCQP + 1;
+    //console.log("We came to createQuizPage for " + debuggerCQP + ". time.")
+
     // Until the hyperlinks for next batch is ready, show "loading" on the button.
     // However, this shouldn't take more than a couple of ms, hence, something is
     // broken, if this is shown.
     document.getElementById("next").innerHTML = "Loading...";
-
-    // Start readying the next quiz view.
-    utilizeFetchedData(dataFromXenocanto);
 
     // Change welcome text into instructions.
     document.getElementById("firstParagraph").innerHTML="Listen to the audio sample and select the corresponding spectrogram.";
@@ -125,7 +142,7 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
     document.querySelector(".thirdrow").style.background = "aliceblue";
 
     // Also, at start of function, empty divs. 
-    // Otherwise, content will stack up when button is pushed.
+    // Otherwise, content will stack up when the button is pushed.
     clearDivs();
 
     // Select song from the local folder and create the player.
@@ -219,6 +236,9 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
             }
         }
     }
+
+    // Ready the next quiz view.
+    utilizeFetchedData(dataFromXenocanto);
 }
 
 
@@ -233,7 +253,7 @@ function createPlayer(songFile) {
     song.src = songFile;
     song.type = "audio/mp3";
     document.querySelector(".player").appendChild(song);
-    // song.play(); // If this is enabled, the console says: "Uncaught (in promise) DOMException: The fetching process for the media resource was aborted by the user agent at the user's request."
+    song.play();
 }
 
 // Display three spectrograms and create checkboxes next to the images.
