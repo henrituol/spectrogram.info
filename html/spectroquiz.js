@@ -192,19 +192,33 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
     // Create checkbox listeners 
     document.getElementById("A").addEventListener(
         "change", () => { 
+            putDefaultColor (),
             uncheckPreviousAnswer("B", "C"),
             selectionResult("A", whichOneIsRight) 
     });
     document.getElementById("B").addEventListener(
         "change", () => { 
+            putDefaultColor (),
             uncheckPreviousAnswer("A", "C"),
             selectionResult("B", whichOneIsRight) 
     });
     document.getElementById("C").addEventListener(
         "change", () => { 
+            putDefaultColor (),
             uncheckPreviousAnswer("A", "B"),
             selectionResult("C", whichOneIsRight) 
         });
+
+
+    // Make sure only one color is updated at a time.
+    // Switch to default color.
+    function putDefaultColor () {
+        const defaultColor = "aliceblue";
+        document.querySelector(".firstrow").style.background = defaultColor;
+        document.querySelector(".secondrow").style.background = defaultColor;
+        document.querySelector(".thirdrow").style.background = defaultColor;
+    }
+
 
     // Check whether the checkbox that changed is the correct selection or not.
     // Also, let the user know!
@@ -244,31 +258,10 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
     function uncheckPreviousAnswer(anotherCheckbox, yetAnotherCheckbox) {
         if (document.getElementById(anotherCheckbox).checked == true) {
             document.getElementById(anotherCheckbox).checked = false;
-            switch(anotherCheckbox) {
-                case "A":
-                    document.querySelector(".firstrow").style.background = 'aliceblue';
-                    break;
-                case "B":
-                    document.querySelector(".secondrow").style.background = 'aliceblue';
-                    break;
-                case "C":
-                    document.querySelector(".thirdrow").style.background = 'aliceblue';
-                    break;
-            }
+
         } 
         if (document.getElementById(yetAnotherCheckbox).checked == true) {
             document.getElementById(yetAnotherCheckbox).checked = false;
-            switch(yetAnotherCheckbox) {
-                case "A":
-                    document.querySelector(".firstrow").style.background = 'aliceblue';
-                    break;
-                case "B":
-                    document.querySelector(".secondrow").style.background = 'aliceblue';
-                    break;
-                case "C":
-                    document.querySelector(".thirdrow").style.background = 'aliceblue';
-                    break;
-            }
         }
     }
 
