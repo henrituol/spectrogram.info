@@ -1,3 +1,14 @@
+.button {
+    width: 120px;
+    background-color: rgb(213, 234, 253);
+    font-size: medium;
+    font-family: inherit;
+    padding: 5px;
+    vertical-align: baseline;
+    border-radius: 10px;
+    border: 1px;
+}
+
 .firstrow  {
     display: flex;
     padding: 10px;

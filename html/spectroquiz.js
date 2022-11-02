@@ -289,7 +289,8 @@ function createCitationsWindow() {
     citationButton.innerText = "See citations"
     document.querySelector(".player").appendChild(citationButton);
     citationButton.addEventListener("click", showCitations);
-    citationButton.style = "margin-left: 10px; vertical-align: 100%;";
+    citationButton.className = "button";
+    citationButton.style = "margin-left: 10px; vertical-align: 100%; font-size: small;";
 
     function showCitations () {
         alert("Sources of the audio file and spectrograms: \n \n"
