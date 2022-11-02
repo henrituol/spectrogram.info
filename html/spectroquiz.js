@@ -335,7 +335,7 @@ function createCitationsWindow() {
     }
 }
 
-// Display three spectrograms and create checkboxes next to the images.
+// Display three spectrograms and create checkboxes.
 function displaySpectrogram(spectrogramFile, numberOfRow) {
     
     // Create spectrogram related variable and information
@@ -353,21 +353,38 @@ function displaySpectrogram(spectrogramFile, numberOfRow) {
     // Create checkbox related variable and information
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.name = "selection";
+    // Checkbox itself will not be shown, but rather its label.
+    checkbox.style = "display: none;"
 
-    // Display the chosen spectrogram and checkbox on selected number of row.
+    // Update IDs according to row.
     if (numberOfRow == 1) {
-        document.querySelector(".firstrow").appendChild(image);
         checkbox.id = "A";
-        document.querySelector(".firstrow").appendChild(checkbox);
     } else if (numberOfRow == 2) {
-        document.querySelector(".secondrow").appendChild(image);
         checkbox.id = "B";
-        document.querySelector(".secondrow").appendChild(checkbox);
     } else if (numberOfRow == 3) {
-        document.querySelector(".thirdrow").appendChild(image);
         checkbox.id = "C";
-        document.querySelector(".thirdrow").appendChild(checkbox);
     }
+
+    // Set up label, i.e. image works as a checkbox label.
+    const label = document.createElement('label');
+    label.setAttribute("for", checkbox.id);
+    label.appendChild(checkbox);
+    // Display spectrograms in the center of div.
+    label.style = "margin: auto";
+
+    // Display the chosen spectrogram on selected number of row.
+    if (numberOfRow == 1) {
+        label.appendChild(image);
+        document.querySelector(".firstrow").appendChild(label);
+    } else if (numberOfRow == 2) {
+        label.appendChild(image);
+        document.querySelector(".secondrow").appendChild(label);
+    } else if (numberOfRow == 3) {
+        label.appendChild(image);
+        document.querySelector(".thirdrow").appendChild(label);
+    }
+
 }
 
 // A small helper function to enable easy clearing of divs.
