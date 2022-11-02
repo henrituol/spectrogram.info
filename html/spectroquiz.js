@@ -22,7 +22,13 @@ let clickCounter = 0;
 
 // https://xeno-canto.org/ offers a handy query for JSON
 // The scope of recordings is confined to A quality recordings.
-fetch("https://xeno-canto.org/api/2/recordings?query=q:A") // xeno-canto query into a promise
+// One page has 500 recordings in an array.
+// There are 489 pages of A quality data (in November 2022).
+// First, take a random page and make a query for it. Then, save its data for this session.
+const randomPageNumber = Math.floor(Math.random() * 400);
+const queryToRecordings = "https://xeno-canto.org/api/2/recordings?query=q:A&page=" + randomPageNumber;
+
+fetch(queryToRecordings) // xeno-canto query into a promise
 .then(response => response.json())  // Turn it into object
 .then(saveData)           // Take the data to good use. See function below.
 .catch(console.error);
@@ -42,21 +48,21 @@ function utilizeFetchedData(data) {
     console.log("We came to utilizeFetchedData for " + debuggerUFD + ". time.")
     */
     
-    // There are 500 recordings in the first page of data, therefore, let's pick one randomly between 1-500.
-    let randomNumber = Math.floor(Math.random() * 501);
+    // There are 500 recordings in the first page of data, therefore, let's pick one randomly.
+    let randomNumber = Math.floor(Math.random() * 500);
     // Xeno-canto's data is organized in a way that we can access specific sample with title "recordings".
     let randomRecording = (data.recordings[randomNumber]);
     xenocantoAudio = randomRecording.file; // This is the URL to an audio sample.
     xenocantoCorrectSpectrogram = randomRecording.sono.large; // This is the URL to the corresponding spectrogram.
 
     // Choose random false spectrogram...
-    let secondRandomNumber = Math.floor(Math.random() * 501);
+    let secondRandomNumber = Math.floor(Math.random() * 500);
     // ... but make sure it is not the one already chosen.
     if (randomNumber == secondRandomNumber) {
         // And if it is the same, create new random numbers until it is not the same.
         // Should be quite unlikely that we ever got here, let alone stay here for long.
         while (randomNumber == secondRandomNumber) {
-            secondRandomNumber = Math.floor(Math.random() * 501);
+            secondRandomNumber = Math.floor(Math.random() * 500);
             //console.log("We ended up making a new random number!")
         }
     }
@@ -64,10 +70,10 @@ function utilizeFetchedData(data) {
     xenocantoFalseX = firstFalse.sono.large;
 
     // And the same thing for second false spectrogram.
-    let thirdRandomNumber = Math.floor(Math.random() * 501);
+    let thirdRandomNumber = Math.floor(Math.random() * 500);
     if (randomNumber == thirdRandomNumber) {
         while (randomNumber == thirdRandomNumber) {
-            thirdRandomNumber = Math.floor(Math.random() * 501);
+            thirdRandomNumber = Math.floor(Math.random() * 500);
             //console.log("We ended up making a new random number!")
         }
     }
