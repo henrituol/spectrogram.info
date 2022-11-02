@@ -1,9 +1,41 @@
 /*
 Henri Pitkänen 2022
+
+This web application creates a quiz: the aim is to connect an audio sample and corresponding spectrogram.
+Audio samples and spectrograms are fetched from https://xeno-canto.org/
 */
 
-// This web application creates a quiz: the aim is to connect an audio sample and corresponding spectrogram.
-// Audio samples and spectrograms are fetched from https://xeno-canto.org/
+// Draw first view.
+const firstView = document.getElementById("maincontainer");
+firstView.innerHTML = `
+<div class="container" id="firstContainer">
+    <h1>Spectrogram quiz</h1>
+    <div id="info">
+        <p>Welcome to the spectrogram quiz!</p>
+        <p></p>
+        <p>Wait until loading is finished, and press "Quiz me!" to start.</p>
+        <p></p>
+        <p>Then, listen to the audio sample and select the corresponding spectrogram.</p>
+        <p></p>  
+        <p></p>        
+    </div>
+    <div>
+        <button class="button" id="next">Loading...</button>
+    </div>
+</div>
+`;
+
+// Container width depending on the size of the viewport, i.e., desktop or mobile.
+let maxWidth = document.documentElement.clientWidth;
+//console.log(maxWidth);
+if (maxWidth < 600) {
+    firstContainer.style = "max-width:" + maxWidth + "px;";
+} else {
+    firstContainer.style = "max-width: 585px;"
+}
+firstContainer.style = "padding-bottom: 30px; padding-left: 20px; padding-right: 20px;";
+
+
 
 // Initialize variables for xeno-canto's audio samples and spectrograms.
 let xenocantoAudio;
@@ -115,6 +147,8 @@ function utilizeFetchedData(data) {
 
 //  Before we create a new quiz view, let's randomize order of the images.
 function randomizeSpectrograms () {
+
+    createPageLayout();
 
     // For debugging
     //debuggerRS = debuggerRS + 1;
@@ -343,4 +377,38 @@ function clearDivs () {
     document.querySelector(".secondrow").innerHTML="";
     document.querySelector(".thirdrow").innerHTML="";
     document.getElementById("result").innerHTML="";
+}
+
+function createPageLayout() {
+
+document.getElementById("maincontainer").innerHTML = `
+    <div class="container">
+        <h1>Spectrogram quiz</h1>
+        <p id="firstParagraph"></p>
+        <p></p>
+        <div class="player"></div>
+        <p></p>
+        <div class="firstrow">
+            <div class="spectrograms">
+            </div>
+            <div class="selections"></div>
+        </div>
+        <div class="secondrow">
+            <div class="spectrograms"> 
+            </div>
+            <div class="selections"></div>
+        </div>
+        <div class="thirdrow">
+            <div class="spectrograms">
+            </div>
+            <div class="selections"></div>
+        </div>
+        <p></p>
+        <p id="result"></p>
+        <p></p>
+        <div>
+            <button class="button" id="next">Loading...</button>
+        </div>
+    </div>
+    `;
 }
