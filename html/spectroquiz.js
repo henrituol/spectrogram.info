@@ -11,6 +11,7 @@ let xenocantoCorrectSpectrogram;
 let xenocantoFalseX;
 let xenocantoFalseY;
 let dataFromXenocanto;
+let citations = []; 
 
 // For debugging
 /*
@@ -37,6 +38,7 @@ function saveData(data) {
     dataFromXenocanto = data; // Save data into the global variable for later use.
     utilizeFetchedData(dataFromXenocanto); // This is also called later, hence, this different function; no need to save data again.
     //console.log("Data saved.")
+    //console.log(data);
 }
 
 function utilizeFetchedData(data) {
@@ -54,6 +56,15 @@ function utilizeFetchedData(data) {
     let randomRecording = (data.recordings[randomNumber]);
     xenocantoAudio = randomRecording.file; // This is the URL to an audio sample.
     xenocantoCorrectSpectrogram = randomRecording.sono.large; // This is the URL to the corresponding spectrogram.
+    // Also, save citation and licese to an array.
+    let recordist = randomRecording.rec;
+    let id = randomRecording.id;
+    let license = randomRecording.lic;
+    let citation = recordist + ", XC" 
+        + id + ". Accessible at www.xeno-canto.org/" 
+        + id + ". License: " + license;
+    citations[0] = citation;
+
 
     // Choose random false spectrogram...
     let secondRandomNumber = Math.floor(Math.random() * 500);
@@ -68,6 +79,13 @@ function utilizeFetchedData(data) {
     }
     let firstFalse = (data.recordings[secondRandomNumber]);
     xenocantoFalseX = firstFalse.sono.large;
+    recordist = firstFalse.rec;
+    id = firstFalse.id;
+    license = firstFalse.lic;
+    citation = recordist + ", XC" 
+        + id + ". Accessible at www.xeno-canto.org/" 
+        + id + ". License: " + license;
+    citations[1] = citation;
 
     // And the same thing for second false spectrogram.
     let thirdRandomNumber = Math.floor(Math.random() * 500);
@@ -79,6 +97,15 @@ function utilizeFetchedData(data) {
     }
     let secondFalse = (data.recordings[thirdRandomNumber]);
     xenocantoFalseY = secondFalse.sono.large;
+    recordist = secondFalse.rec;
+    id = secondFalse.id;
+    license = secondFalse.lic;
+    citation = recordist + ", XC" 
+        + id + ". Accessible at www.xeno-canto.org/" 
+        + id + ". License: " + license;
+    citations[2] = citation;
+
+    //console.log(citations);
 
     // To indicate the user that the app is ready to be used, change the text inside the button.
     document.getElementById("next").innerHTML = "Quiz me!"
@@ -153,6 +180,8 @@ function createQuizPage(audioFile, image1, image2, image3, whichOneIsRight) {
 
     // Select song from the local folder and create the player.
     createPlayer(audioFile);
+
+    createCitationsWindow();
 
     // Display spectrograms and checkboxes
     displaySpectrogram(image1, 1); // Display spectrogram specified when function is called on the row #1.
@@ -262,6 +291,22 @@ function createPlayer(songFile) {
     song.play();
 }
 
+function createCitationsWindow() {
+    const citationButton = document.createElement("button");
+    citationButton.innerText = "See citations"
+    document.querySelector(".player").appendChild(citationButton);
+    citationButton.addEventListener("click", showCitations);
+    citationButton.style = "margin-left: 10px; vertical-align: 100%;";
+
+    function showCitations () {
+        alert("Sources of the audio file and spectrograms: \n \n"
+            + citations[0] + "\n \n"
+            + citations[1] + "\n \n"
+            + citations[2]
+        )
+    }
+}
+
 // Display three spectrograms and create checkboxes next to the images.
 function displaySpectrogram(spectrogramFile, numberOfRow) {
     
@@ -276,7 +321,6 @@ function displaySpectrogram(spectrogramFile, numberOfRow) {
     } else {
         image.width = 500;
     }
-    
 
     // Create checkbox related variable and information
     let checkbox = document.createElement("input");
