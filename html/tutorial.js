@@ -10,9 +10,9 @@ function openTutorial () {
     <div class="tutorialContainer" id="tutorialContainer">
         <h1>Tutorial</h1>
         <div id="info">
-            <h3>How to read spectrograms related to audio signal?</h3>
+            <h3>How to read spectrograms related to an audio signal?</h3>
             <p></p>
-            <p>The objective in spectrogram quiz is to connect an audio sample with a corresponding spectrogram. A spectrogram is a visualization of frequencies present in a signal. For example, this following image is a fairly typical spectrogram of a birdsong. Frequency from 0 Hz to 15 kHz is displayed on the y-axis. The x-axis represents time from 0 seconds on the left edge and 10 seconds on the right edge. In short, this spectrogram shows a few-second-long melody line of a <i>phylloscopus trochilus</i>. The brown graph under the spectrogram is the envelope representing the dynamics, i.e., how loud the signal is.</p>        
+            <p>The objective in spectrogram quiz is to connect an audio sample with a corresponding spectrogram. A spectrogram is a visualization of frequencies present in a signal. For example, this following image is a fairly typical spectrogram of a birdsong. Frequency from 0 Hz to 15 kHz is displayed on the y-axis. The x-axis represents time from 0 seconds on the left edge to 10 seconds on the right edge. In short, this spectrogram shows a few-second-long melody line of a <i>phylloscopus trochilus</i>. The brown graph under the spectrogram is the envelope representing the dynamics, i.e., how loud the signal is.</p>        
             <p></p>
             <img class="spectrogramDemoImage" id="spectrogramDemoImage" src="/demomaterial/XC726708-large.png" alt="Spectrogram demo">
             <p>Source: Lars Edenius, XC726708. Accessible at <a href="https://www.xeno-canto.org/726708" title="https://www.xeno-canto.org/726708">www.xeno-canto.org/726708</a>. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="Go to Attribution-NonCommercial-ShareAlike 4.0 International">CC BY-NC-SA 4.0.</a></p>
