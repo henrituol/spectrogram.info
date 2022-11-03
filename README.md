@@ -25,4 +25,4 @@ Idea of the game:
 
 All the sound files and images are fetched from https://xeno-canto.org/ 
 
-You can try out the quiz here: [http://spectrogram.info/](https://spectrogram.info/)
+You can try out the quiz here: [https://spectrogram.info/](https://spectrogram.info/)
