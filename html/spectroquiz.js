@@ -1,14 +1,11 @@
-/*
-Henri Pitkänen 2022
-
-This web application creates a quiz: the aim is to connect an audio sample and corresponding spectrogram.
-Audio samples and spectrograms are fetched from https://xeno-canto.org/
-*/
+// Henri Pitkänen 2022
+// This web application creates a quiz: the aim is to connect an audio sample and corresponding spectrogram.
+// Audio samples and spectrograms are fetched from https://xeno-canto.org/
 
 // Draw first view.
 const firstView = document.getElementById("maincontainer");
 firstView.innerHTML = `
-<div class="container" id="firstContainer">
+<div class="firstContainer" id="firstContainer">
     <h1>Spectrogram quiz</h1>
     <div id="info">
         <p>Welcome to the spectrogram quiz!</p>
@@ -16,12 +13,17 @@ firstView.innerHTML = `
         <p>Wait until loading is finished, and press "Quiz me!" to start.</p>
         <p></p>
         <p>Then, listen to the audio sample and select the corresponding spectrogram.</p>
-        <p></p>  
-        <p></p>        
+        <p></p>       
     </div>
     <div>
         <button class="button" id="next">Loading...</button>
     </div>
+    <div>
+        <p>Don't know what a spectrogram is? Check out the tutorial:</p>
+    </div>
+    <div class="tutorial">
+        <input type="button" class="button" id="tutorialbtn" value="See tutorial" />
+    </div> 
 </div>
 `;
 
@@ -31,10 +33,8 @@ let maxWidth = document.documentElement.clientWidth;
 if (maxWidth < 600) {
     firstContainer.style = "max-width:" + maxWidth + "px;";
 } else {
-    firstContainer.style = "max-width: 585px;"
+    firstContainer.style = "max-width: 585px; "
 }
-firstContainer.style = "padding-bottom: 30px; padding-left: 20px; padding-right: 20px;";
-
 
 
 // Initialize variables for xeno-canto's audio samples and spectrograms.
