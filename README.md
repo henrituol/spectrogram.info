@@ -1,5 +1,7 @@
 # spectrogram.info – Learn to read spectrograms of audio signals
 
+You can try out the quiz here: [https://spectrogram.info/](https://spectrogram.info/)
+
 This is my first excursion into the world of JavaScript.
 I wanted to keep this simple, hence, there are only JavaScript, HTML, and CSS.
 
